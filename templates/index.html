@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    
+    <h1>Wordle</h1>
+
+    <div id="board">
+        {% for i in range(6) %}
+        <div class="row">
+            {% for j in range(5) %}
+            <div class="tile"></div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    <script src="/static/script.js">
+
+    </script>
+</body>
+</html>
+ 

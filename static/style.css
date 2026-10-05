@@ -1,0 +1,32 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    color: green;
+    font-size: 250%;
+}
+
+
+.tile {
+    width: 100%;
+    aspect-ratio: 1;
+    color: black;
+    border: 2px solid #d3d6da;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+}
+
+#board {
+    width: min(90vw, 500px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
