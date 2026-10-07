@@ -1,12 +1,15 @@
 console.log("i belive in you")
-// document.addEventListener("keydown", (event) => {console.log(event.key)});
-//document.addEventListener("keydown", (event) => {if (/^[a-z]$/i.test(event.key)) {console.log(event.key)}});
+
+const message = document.getElementById("message");
+const overlay = document.getElementById("overlay");
+let gameOver = false;
 
 const rows = document.querySelectorAll(".row");
 let currentRow = 0;
 let currentCol = 0;
 
 document.addEventListener("keydown", (event) => {
+    if (gameOver) return;
     if (/^[a-z]$/i.test(event.key) && currentCol < 5) {
         const rowTiles = rows[currentRow].children;
         rowTiles[currentCol].textContent = event.key;
@@ -28,13 +31,12 @@ document.addEventListener("keydown", (event) => {
             for (const tile of rowTiles) {
                 word += tile.textContent;
             }
-            
+
             fetch("/guess", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({guess: word})
+                body: JSON.stringify({guess: word, last: currentRow === 5})
             })
-
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
@@ -43,14 +45,25 @@ document.addEventListener("keydown", (event) => {
                     for (let i = 0; i < 5; i++) {
                         rowTiles[i].classList.add(data.result[i]);
                     }
+
+                    if (data.won) {
+                        message.textContent = "You Won!";
+                        gameOver = true;
+                        overlay.style.display = "flex";
+                    } else if (data.answer) {
+                        message.textContent = "Game over. The word was " + data.answer;
+                        gameOver = true;
+                        overlay.style.display = "flex";
+                    }
+
                     currentRow++;
                     currentCol = 0;
                 }
             });
-
         }
     }
 });
 
-
-
+document.getElementById("restart").addEventListener("click", () => {
+    fetch("/restart", {method: "POST"}).then(() => location.reload());
+});

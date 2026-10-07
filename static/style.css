@@ -51,3 +51,25 @@ h1 {
     border-color: #b22222;
     color: white;
 }
+
+
+#overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#message {
+    font-size: 4rem;
+    text-align: center;
+}
+
+#restart {
+    font-size: 1.5rem;
+    padding: 0.5rem 2rem;
+}
