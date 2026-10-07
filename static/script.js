@@ -35,7 +35,7 @@ document.addEventListener("keydown", (event) => {
             fetch("/guess", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({guess: word, last: currentRow === 5})
+                body: JSON.stringify({guess: word})
             })
             .then(response => response.json())
             .then(data => {
@@ -65,5 +65,5 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.getElementById("restart").addEventListener("click", () => {
-    fetch("/restart", {method: "POST"}).then(() => location.reload());
+    location.reload();
 });
