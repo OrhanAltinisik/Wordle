@@ -1,3 +1,4 @@
+import os
 import random
 from flask import Flask, render_template, request, jsonify, session
 
@@ -8,7 +9,7 @@ with open("words.txt") as f:
     common_words = f.read().lower().split()
 
 app = Flask(__name__)
-app.secret_key = "6cab6c7be741511d99b752e7e370e2a6"
+app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
 
 def new_game():
     session["secret"] = random.choice(common_words)
